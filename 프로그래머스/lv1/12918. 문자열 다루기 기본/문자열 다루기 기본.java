@@ -4,9 +4,9 @@ class Solution {
         if(s.length() == 4 || s.length() == 6){
              try{
               int bool = Integer.parseInt(s);
-              return true;
+              answer = true;
              }catch(Exception e){
-                 return false;
+                 answer = false;
              }
             
         }
