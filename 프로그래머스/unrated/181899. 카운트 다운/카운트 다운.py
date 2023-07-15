@@ -1,4 +1,3 @@
 def solution(start, end):
-    answer = [n for n in range(end, start+1)]
-    answer.sort(reverse = True)
+    answer = [n for n in range(start, end-1, -1)]
     return answer
