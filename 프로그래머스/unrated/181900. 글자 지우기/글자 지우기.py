@@ -1,7 +1,6 @@
 def solution(my_string, indices):
     answer = ''
-    my_list = list(my_string)
-    for idx in range(len(my_list)):
+    for idx in range(len(my_string)):
         if idx not in indices:
-            answer += my_list[idx]
+            answer += my_string[idx]
     return answer
