@@ -5,7 +5,12 @@ def find_max_height(N, M, tree_heights):
 
     while start <= end:
         mid = (start + end) // 2
-        total = sum(max(0, height - mid) for height in tree_heights)
+        total = 0
+
+        # 잘린 나무 길이 계산 최적화
+        for height in tree_heights:
+            if height > mid:
+                total += height - mid
 
         if total >= M:
             result = mid
