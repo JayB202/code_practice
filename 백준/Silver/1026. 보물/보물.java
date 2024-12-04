@@ -1,34 +1,35 @@
+import java.io.*;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
         
-        // 입력
-        int n = scanner.nextInt();
-        int[] A = new int[n];
-        int[] B = new int[n];
-        
-        for (int i = 0; i < n; i++) {
-            A[i] = scanner.nextInt();
-        }
-        for (int i = 0; i < n; i++) {
-            B[i] = scanner.nextInt();
-        }
+        int[] A = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        int[] B = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         
         // A는 오름차순 정렬
         Arrays.sort(A);
-        // B는 내림차순 정렬
-        Integer[] B_desc = Arrays.stream(B).boxed().toArray(Integer[]::new);
-        Arrays.sort(B_desc, Collections.reverseOrder());
-        
-        // S 계산
+        // B는 정렬하지 않고 최대값을 찾아가며 처리
+        boolean[] used = new boolean[n];
         int S = 0;
+        
         for (int i = 0; i < n; i++) {
-            S += A[i] * B_desc[i];
+            int maxB = Integer.MIN_VALUE;
+            int maxIndex = -1;
+            
+            for (int j = 0; j < n; j++) {
+                if (!used[j] && B[j] > maxB) {
+                    maxB = B[j];
+                    maxIndex = j;
+                }
+            }
+            
+            used[maxIndex] = true; // B의 값을 사용 처리
+            S += A[i] * maxB;      // A의 작은 값과 B의 큰 값을 곱함
         }
         
-        // 결과 출력
         System.out.println(S);
     }
 }
