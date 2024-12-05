@@ -1,13 +1,11 @@
-from collections import deque
-
 def can_reach_end(board, n):
-    # BFS 초기 설정
-    queue = deque([(0, 0)])
-    visited = [[False] * n for _ in range(n)]
-    visited[0][0] = True
+    # DFS 초기 설정
+    stack = [(0, 0)]  # 스택을 사용하여 (x, y) 좌표를 넣는다
+    visited = [[False] * n for _ in range(n)]  # 방문한 곳을 체크
+    visited[0][0] = True  # 시작점 방문 처리
 
-    while queue:
-        x, y = queue.popleft()
+    while stack:
+        x, y = stack.pop()  # 스택에서 좌표를 꺼낸다
 
         # 현재 위치에서 이동 가능한 칸 수
         jump = board[x][y]
@@ -19,12 +17,12 @@ def can_reach_end(board, n):
         # 오른쪽으로 이동
         if y + jump < n and not visited[x][y + jump]:
             visited[x][y + jump] = True
-            queue.append((x, y + jump))
+            stack.append((x, y + jump))
 
         # 아래로 이동
         if x + jump < n and not visited[x + jump][y]:
             visited[x + jump][y] = True
-            queue.append((x + jump, y))
+            stack.append((x + jump, y))
 
     return "Hing"
 
