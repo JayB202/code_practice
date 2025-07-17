@@ -50,7 +50,6 @@ public class Main {
 
         int nodeCount = nodes.size();
 
-        // 간선 집합: (작은 좌표, 큰 좌표) 형태로 저장
         Set<String> edgeSet = new HashSet<>();
         for (int[] node : nodes) {
             int r = node[0], c = node[1];
@@ -59,7 +58,6 @@ public class Main {
                 int nc = c + dy[dir];
                 if (inBounds(nr, nc) && map[nr][nc] == '#') {
                     int r1 = r, c1 = c, r2 = nr, c2 = nc;
-                    // 정렬해서 저장
                     if (r1 > r2 || (r1 == r2 && c1 > c2)) {
                         int tmpR = r1, tmpC = c1;
                         r1 = r2; c1 = c2;
@@ -76,7 +74,7 @@ public class Main {
 
         Set<String> visited = new HashSet<>();
 
-        // DFS 방문
+        
         voidDfs:
         {
             Deque<int[]> stack = new ArrayDeque<>();
